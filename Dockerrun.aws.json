@@ -1,0 +1,33 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "henrykuzmick/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "henrykuzmick/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "henrykuzmick/multi-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "henrykuzmick/multi-nginx",
+      "essential": true,
+      "portMappings": [{
+        "hostPort": 80,
+        "containerPort": 80
+      }],
+      "links": ["client", "server"]
+    }
+  ]
+}
